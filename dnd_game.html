@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>DND game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="jquery-3.5.1.min.js"></script>
+    <script src="jquery-ui.min.js"></script>
+
+</head>
+
+<body>
+    <div id="content">
+        <h1 id="mainName">Drag and Drop Game</h1>
+        <div id="life">
+            <div class="lifeBalls First"></div>
+            <div class="lifeBalls Second"></div>
+            <div class="lifeBalls Third"></div>
+        </div>
+        <div id="cardPile"></div>
+        <div id="cardSlots"></div>
+        <div id="unSuccessMessage">
+            <h2>Lose!</h2>
+
+        </div>
+
+        <div id="successMessage">
+            <h2>Win!</h2>
+
+        </div>
+        <div id="moreTry"><button onclick="document.location.reload()">Сыграть еще раз</button> </Div>
+    </div>
+
+
+    <script>
+        $(function () {
+            let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            let words = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
+            let correctCards = 0;
+            let noncorrectCards = 0;
+
+            // перетасуем числа случайным образом
+            numbers.sort(function () {
+                return Math.random() - .5
+            })
+
+            // заполнение cardPile
+            for (let i = 0; i < 10; i++) {
+                $('<div><span>' + numbers[i] + '</span></div>').data('number', numbers[i]).appendTo('#cardPile')
+                    .draggable({
+                        containment: '#content',
+                        revert: true,
+                        cursor: 'move',
+                        // start: function (event, ui) {
+                        //     alert($(this).data('number'));
+                        // }
+                    });
+            }
+
+            $('#cardPile > div > span').delay(2000).fadeOut(2000);
+
+
+            // заполнение cardSlots
+            for (let j = 0; j < 10; j++) {
+                $('<div>' + words[j] + '</div>').data('number', j + 1).appendTo('#cardSlots').droppable({
+                    accept: '#cardPile > div',
+                    drop: handleCardDrop,
+                    // drop: function (event, ui) {
+                    //     alert($(this).data('number'));
+                    // }
+                });
+            }
+
+            function handleCardDrop(event, ui) {
+                // слот в который мы переносим карточку и в переменную заносим номер этого слота
+                let slotNumber = $(this).data('number');
+                // берем номер(data) перетаскиваемой карточки в какой-то слот
+                let cardNumber = ui.draggable.data('number');
+
+                if (slotNumber === cardNumber) {
+                    ui.draggable.addClass('correct');
+                    ui.draggable.draggable('disable');
+
+                    ui.draggable.position({
+                        of: $(this),
+                        my: 'left top',
+                        at: 'left top',
+                    });
+
+                    // отключим возврат на начальную позицию
+                    ui.draggable.draggable('option', 'revert', false);
+                    // или ui.draggable('disable');
+                    correctCards++;
+
+                    if (correctCards === 10) {
+                        $('#successMessage >h2').fadeIn(1500);
+                    }
+                } else {
+                    noncorrectCards++;
+                    $('.First').css('background-color', 'red');
+                    if (noncorrectCards === 2) {
+                        $('.Second').css('background-color', 'red');
+                    }
+                    if (noncorrectCards > 2) {
+                        $('.lifeBalls').css('background-color', 'red');
+                        $('#unSuccessMessage >h2').fadeIn(1500);
+                    }
+                }
+            }
+
+        });
+    </script>
+</body>
+
+</html>

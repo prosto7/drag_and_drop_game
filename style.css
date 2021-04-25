@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Slackey&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&family=Slackey&display=swap');
+#content {
+    margin: 40px 50px;
+    border: 1px solid #a86a6a;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px #dd6b6b inset;
+}
+
+#cardPile {
+    background-color: #ffd;
+    border-radius: 15px;
+    box-shadow: 0 0 15px #111111;
+}
+
+#cardSlots {
+    background-color: #ddf;
+    border-radius: 15px;
+    box-shadow: 0 0 15px #111111;
+}
+
+#cardPile, #cardSlots {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    border: 2px solid black;
+    min-height: 200px;
+    margin: 60px auto;
+}
+#cardPile div {
+    background-color: rgba(199, 184, 184, 0.692);
+    color: rgb(37, 33, 33);
+    font-size: 50px;
+    text-shadow: 0 0 15px #A9A9A9;
+    line-height: 100px;
+    border: 2px solid #D4D4D4; 
+border-radius: 10px;
+font-family: 'Slackey', cursive;
+}
+
+#cardSlots div {
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    font-family: 'Roboto', sans-serif;
+   
+}
+
+#cardPile div, #cardSlots div {
+    padding: 40px 10px 0;
+    border: 2px solid black;
+    text-align: center;
+    flex: 1 0 auto;
+    margin: 2px;
+    user-select: none;
+   
+}
+
+.correct {
+    background-color: #ace357 !important;
+    box-shadow: 0 0 15px #ace357;
+}
+
+#mainName   {
+    font-family: 'Slackey', cursive;
+    padding-left: 35%;
+
+}
+
+#successMessage {
+    display: flex;
+    justify-content: center;
+}
+
+#successMessage > h2 {
+    display: none;
+    font-family: 'Slackey', cursive;
+    font-size: 70px;
+    color: #0fc22d;
+    text-shadow: 0 0 10px #1f362383;
+    
+}
+
+#moreTry  {
+    padding-left: 45%;
+
+}
+
+#moreTry button {
+    width: 145px;
+    height: 50px;
+    font-family: Roboto;
+    background-color: seashell;
+    box-shadow: 0 0 15px rgb(37, 33, 33);
+    border-radius: 10px;
+}
+
+#life   {
+    display: flex;
+    justify-content: space-between;
+    width: 180px;
+    margin: 0 auto ;
+   
+    
+}
+.lifeBalls {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: green;
+}
+
+
+#unSuccessMessage {
+    display: flex;
+    justify-content: center;
+}
+
+#unSuccessMessage > h2 {
+    display: none;
+    font-family: 'Slackey', cursive;
+    font-size: 70px;
+   
+    text-shadow: 0 0 10px #1f362383;
+    
+}
